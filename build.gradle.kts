@@ -3,6 +3,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 val mainClass: String by project
 
 val kotlinxCoroutinesCoreVersion: String by project
+val moshiVersion: String by project
 val kotlinLoggingVersion: String by project
 val zirconCoreVersion: String by project
 val zirconSwingVersion: String by project
@@ -52,6 +53,9 @@ dependencies {
 	// Kotlin core
 	implementation("org.jetbrains.kotlin:kotlin-stdlib")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutinesCoreVersion")
+
+	// JSON parsing
+	implementation("com.squareup.moshi:moshi-kotlin:$moshiVersion")
 
 	// Logging
 	implementation("io.github.microutils:kotlin-logging-jvm:$kotlinLoggingVersion")

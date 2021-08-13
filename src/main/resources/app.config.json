@@ -1,0 +1,76 @@
+{
+  "blinkLengthInMilliSeconds": 500,
+  "cursorStyle": "FIXED_BACKGROUND",
+  "cursorColor": {
+	"red": 192,
+	"green": 192,
+	"blue": 192,
+	"alpha": 255
+  },
+  "isCursorBlinking": false,
+  "isClipboardAvailable": true,
+  "defaultTileset": {
+	"id": "d12c5222-a13a-4157-965a-58156e464bcd",
+	"tileType": 0,
+	"tilesetType": 0,
+	"tilesetSourceType": 1,
+	"width": 16,
+	"height": 16,
+	"path": "/cp_437_tilesets/wanderlust_16x16.png"
+  },
+  "defaultGraphicalTileset": {
+	"id": "39fd5b3d-e552-4932-8c29-af97b4ee58c1",
+	"tileType": 1,
+	"tilesetType": 2,
+	"tilesetSourceType": 1,
+	"width": 16,
+	"height": 16,
+	"path": "/graphic_tilesets/nethack_16x16.zip"
+  },
+  "defaultColorTheme": {
+	"primaryForegroundColor": {
+	  "red": 192,
+	  "green": 192,
+	  "blue": 192,
+	  "alpha": 255
+	},
+	"secondaryForegroundColor": {
+	  "red": 192,
+	  "green": 192,
+	  "blue": 192,
+	  "alpha": 255
+	},
+	"primaryBackgroundColor": {
+	  "red": 0,
+	  "green": 0,
+	  "blue": 0,
+	  "alpha": 255
+	},
+	"secondaryBackgroundColor": {
+	  "red": 0,
+	  "green": 0,
+	  "blue": 0,
+	  "alpha": 255
+	},
+	"accentColor": {
+	  "red": 192,
+	  "green": 192,
+	  "blue": 192,
+	  "alpha": 255
+	}
+  },
+  "debugMode": false,
+  "size": {
+	"width": 60,
+	"height": 30
+  },
+  "fullScreen": false,
+  "betaEnabled": false,
+  "title": "Bungeon",
+  "fpsLimit": 60,
+  "debugConfig": {
+	"displayGrid": false,
+	"displayCoordinates": false,
+	"displayFps": false
+  }
+}
