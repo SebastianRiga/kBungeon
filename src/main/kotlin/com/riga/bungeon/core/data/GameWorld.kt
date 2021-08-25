@@ -12,11 +12,11 @@ import org.hexworks.zircon.api.data.Size3D
 import org.hexworks.zircon.api.data.Tile
 import org.hexworks.zircon.api.game.GameArea
 
-class GameWorld(blocks: Map<Position3D, GameBlock>, visibleSize: Size3D, actualSize: Size3D) : GameArea<Tile, GameBlock>
-by GameAreaBuilder.newBuilder<Tile, GameBlock>()
-	.withVisibleSize(visibleSize)
-	.withActualSize(actualSize)
-	.build() {
+class GameWorld(blocks: Map<Position3D, GameBlock>, visibleSize: Size3D, actualSize: Size3D) :
+	GameArea<Tile, GameBlock> by GameAreaBuilder.newBuilder<Tile, GameBlock>()
+		.withVisibleSize(visibleSize)
+		.withActualSize(actualSize)
+		.build() {
 
 	val engine: TurnBasedEngine<GameContext> = Engine.create()
 
@@ -39,51 +39,29 @@ by GameAreaBuilder.newBuilder<Tile, GameBlock>()
 			}
 		}
 	}
+	
 
-	fun getRandomEmptyPosition(
-		offset: Position3D,
-		size: Size3D,
-		attempts: Int = size.xLength * size.yLength
-	): Position3D? {
-		var attempt = 0
-
-		while (attempt < attempts) {
-			val x = (Math.random() * size.xLength).toInt() + offset.x
-			val y = (Math.random() * size.yLength).toInt() + offset.y
-			val z = (Math.random() * size.zLength).toInt() + offset.z
-
-			val tmpPos = Position3D.create(x, y, z)
-			fetchBlockAtOrNull(tmpPos)?.let {
-				if (it.isEmptyFloor) {
-					return tmpPos
-				}
-			}
-			attempt++
-		}
-
-		return null
-	}
-
-	fun getFirstEmptyPosition(): Position3D = blocks
+	fun getFirstEmptyPositionByBlocks(): Position3D = blocks
 		.filter {
 			it.value.isEmptyFloor
 		}
 		.firstNotNullOf {
 			it.key
 		}
-
-	fun getFirstEmptyPosition(z: Int = 1): Maybe<Position3D> {
-		(0..actualSize.yLength).forEach { y ->
-			(0..actualSize.xLength).forEach { x ->
-				Position3D.create(x, y, z).apply {
-					fetchBlockAtOrNull(this)?.let {
-						if (it.isEmptyFloor) {
-							return Maybe.of(this)
-						}
-					}
+	
+	fun move(obj: AnyGameObject, target: Position3D): Boolean = let {
+		fetchBlockAtOrNull(obj.position)?.let { currentBlock ->
+			fetchBlockAtOrNull(target)?.let { newBlock -> 
+				if (newBlock.hasCollision) {
+					return false
 				}
+				
+				currentBlock.removeEntity(obj)
+				obj.position = target
+				newBlock.addEntity(obj)
+				return true
 			}
 		}
-		return Maybe.empty()
+		return false
 	}
 }

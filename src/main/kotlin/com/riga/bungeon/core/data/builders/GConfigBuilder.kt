@@ -15,7 +15,7 @@ class GConfigBuilder private constructor() {
 
 	private var dungeonDeath = 2
 
-	private var tileset = CP437TilesetResources.bisasam20x20()
+	private var tileset = CP437TilesetResources.markX16x16()
 	private var colorTheme = ColorPallet.getColorTheme()
 
 	companion object {

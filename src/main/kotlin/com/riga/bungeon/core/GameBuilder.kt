@@ -21,15 +21,15 @@ class GameBuilder private constructor() {
 
 	fun build(): GameController = GameController(world, player)
 
-	private fun player() = apply {
+	private fun player(): GameBuilder = also {
 		player = GameObjectFactory.newPlayer().also { player ->
-			world.getFirstEmptyPosition().also { position ->
+			world.getFirstEmptyPositionByBlocks().also { position ->
 				world.putObject(player, position)
 			}
 		}
 	}
 
-	private fun prepare() = also {
+	private fun prepare(): GameBuilder = also {
 		world.scrollUpBy(world.actualSize.zLength)
 	}
 }
