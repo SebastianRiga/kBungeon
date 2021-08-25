@@ -1,11 +1,18 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
-val mainClass: String by project
+// Project Config
+val projectGroup: String by project
+val projectVersion: String by project
+val projectMainClass: String by project
 
+// Library Versions
+val kotlinVersion: String by project
 val kotlinxCoroutinesCoreVersion: String by project
+val moshiVersion: String by project
 val kotlinLoggingVersion: String by project
 val zirconCoreVersion: String by project
 val zirconSwingVersion: String by project
+val amethystVersion: String by project
 val mockitoCoreVersion: String by project
 val assertjCoreVersion: String by project
 val junitApiVersion: String by project
@@ -27,11 +34,11 @@ java {
 
 tasks {
 	named<ShadowJar>("shadowJar") {
-		archiveClassifier.set("")
-		archiveVersion.set("")
+		archiveClassifier.set(projectGroup)
+		archiveVersion.set(projectVersion)
 		mergeServiceFiles()
 		manifest {
-			attributes(mapOf("Main-Class" to mainClass))
+			attributes(mapOf("Main-Class" to projectMainClass))
 		}
 	}
 	build {
@@ -44,14 +51,18 @@ tasks {
 
 tasks.getting(Jar::class) {
 	manifest {
-		attributes["Main-Class"] = mainClass
+		attributes["Main-Class"] = projectMainClass
 	}
 }
 
 dependencies {
 	// Kotlin core
-	implementation("org.jetbrains.kotlin:kotlin-stdlib")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
+	implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutinesCoreVersion")
+
+	// JSON parsing
+	implementation("com.squareup.moshi:moshi-kotlin:$moshiVersion")
 
 	// Logging
 	implementation("io.github.microutils:kotlin-logging-jvm:$kotlinLoggingVersion")
@@ -59,6 +70,9 @@ dependencies {
 	// Zircon - Tile Engine & Text GUI
 	implementation("org.hexworks.zircon:zircon.core-jvm:$zirconCoreVersion")
 	implementation("org.hexworks.zircon:zircon.jvm.swing:$zirconSwingVersion")
+	
+	// Amethyst
+	implementation("org.hexworks.amethyst:amethyst.core-jvm:$amethystVersion")
 
 	// Test dependencies
 	testImplementation("org.mockito:mockito-core:$mockitoCoreVersion")
