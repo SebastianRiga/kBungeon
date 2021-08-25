@@ -91,7 +91,6 @@ object JsonTestHelper {
 			Assertions.assertThat(debugMode).isEqualTo(expected?.debugMode)
 			Assertions.assertThat(size).isEqualTo(expected?.size)
 			Assertions.assertThat(fullScreen).isEqualTo(expected?.fullScreen)
-			Assertions.assertThat(betaEnabled).isEqualTo(expected?.betaEnabled)
 			Assertions.assertThat(title).isEqualTo(expected?.title)
 			Assertions.assertThat(fpsLimit).isEqualTo(expected?.fpsLimit)
 

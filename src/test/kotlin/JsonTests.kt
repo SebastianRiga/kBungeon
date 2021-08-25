@@ -1,4 +1,4 @@
-import com.riga.bungeon.resources.json.JsonAdapterFactory
+import com.riga.bungeon.system.json.JsonAdapterFactory
 import helpers.JsonTestHelper
 import org.hexworks.zircon.api.application.AppConfig
 import org.junit.jupiter.api.Test

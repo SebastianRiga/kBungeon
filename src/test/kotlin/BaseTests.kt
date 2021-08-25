@@ -1,10 +1,19 @@
-import com.riga.bungeon.resources.json.adapter.*
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import org.hexworks.zircon.api.application.AppConfig
+import com.riga.bungeon.core.maps.BspBuilder
+import com.riga.bungeon.meta.classes.BackingField
+import org.assertj.core.api.Assertions
+import org.hexworks.zircon.api.data.Size3D
 import org.junit.jupiter.api.Test
-import org.assertj.core.api.Assertions.*
 
 class BaseTests {
 
+	private var Int.prodNumber: Float by BackingField { it.toFloat() }
+	
+	@Test
+	fun scribble() {
+		val num = 2.also {
+			it.prodNumber = 20f
+		}
+		
+		Assertions.assertThat(num.prodNumber).isEqualTo(20f)
+	}
 }
